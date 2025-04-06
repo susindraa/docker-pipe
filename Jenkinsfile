@@ -2,32 +2,31 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'susindraa/first-dock'   // your docker hub image name
-        DOCKER_CREDENTIALS_ID = 'docker-hub-creds'  // set this ID in Jenkins credentials
+        IMAGE_NAME = 'susindraa/docker-pipe'   // your docker hub image name
+        DOCKER_CREDENTIALS_ID = 'docker-id'  // set this ID in Jenkins credentials
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/susindraa/Docker-Zero-to-Hero.git'
+                git 'https://github.com/susindraa/docker-pipe.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                dir('FIRST DOCK') {
                     script {
-                        docker.build("${IMAGE_NAME}", '.')
+                        docker.build("${docker-pipe}", '.')
                     }
                 }
             }
-        }
+        
 
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS_ID}") {
-                        docker.image("${IMAGE_NAME}").push('latest')
+                    docker.withRegistry('https://index.docker.io/v1/', "${docker-id}") {
+                        docker.image("${docker-pipe}").push('latest')
                     }
                 }
             }
