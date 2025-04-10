@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'susindraa/docker-pipe'        // ✅ Docker Hub image name
+        IMAGE_NAME = 'susindraa/docker-10'        // ✅ Docker Hub image name
         DOCKER_CREDENTIALS_ID = 'docker-id'         // ✅ Jenkins credentials ID
     }
 
